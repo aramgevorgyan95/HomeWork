@@ -50,8 +50,7 @@ function App() {
 
 
   // AXIOSI HAMAR........................................................................
-
-
+  
   const [albom, setAlbom] = useState([]);
   const [loading, setLoading] = useState(false);
   const [photo, setPhoto] = useState([]);
