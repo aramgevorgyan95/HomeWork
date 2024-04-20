@@ -104,17 +104,14 @@ function App() {
   // }, [status, albom, photo]);
 
 
-  // //--------------------------------------------------------------------------------------------------------------
-
-
+  // userner--------------------------------------------------------------------------------------------------------------
   const [users, setUsers] = useState([]);
-  const [load, setLoad] = useState(false);
   const [name, setName] = useState([]);
+
   useEffect(() => {
-    setLoad(true)
     publicAPI.get('/users').then((res) => {
       setUsers(res.data);
-      setLoad(false)
+
     })
   }, [])
 
@@ -132,34 +129,38 @@ function App() {
     }
   })
 
-//bjishkneri hamar------------------------------------------------------------------------------
+  //bjishkneri hamar------------------------------------------------------------------------------
   const [doctor, setDoctor] = useState([]);
 
-  useEffect(()=> {
+  useEffect(() => {
     doctorAPI.get('/', {
-      params:{
+      params: {
         page: 1,
         category: 1
       }
-    }).then((res)=> {
-      setDoctor(res.data.results);
+    }).then((res) => {
+      setDoctor(res.data);
+      console.log(res.data);
     })
-  },[])
+  }, [])
 
   //React i18next targmanutyun kazmakerpelu hamar---------------------------------------------------------
 
   // const { t, i18n } = useTranslation();
   return (
     <>
-        {doctor.results.map((item,index) => {
-          return <h1 key={index}>{item.first_name}</h1>
-        })}
+    {doctor.count}
+      {/* {doctor.map((item, index) => {
+        return <h1 key={index}>
+          {item.count}
+        </h1>
+      })} */}
       <button>Терапевт</button>
       <button>Педиатр</button>
       <button>Акушер-гинеколог</button>
 
-
-      {load ? 'Loading' : users.map((item, index) => {
+        {/* userner */}
+      {users.map((item, index) => {
         return <button onClick={getNameid(item.id)} key={index}>
           {item.id}
         </button>
@@ -171,6 +172,9 @@ function App() {
           <h1 key={index}>{item.phone}</h1>
         </div>
       })}
+
+
+
 
       {/* <NameCreateContext.Provider value={{ name, setName,translateRU,translateEN }}>
         <Red />
@@ -196,7 +200,7 @@ function App() {
 
 
       {/* AXIOSI HAMAR ----------------------------------------------------------------------*/}
-{/* 
+      {/* 
       {<div>
         {loading ? <p>Loading ........</p> : content}
       </div>} */}
