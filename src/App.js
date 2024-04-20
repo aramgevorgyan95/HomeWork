@@ -128,6 +128,16 @@ function App() {
       })
     }
   })
+
+  useEffect(()=> {
+    publicAPI.get('/users', {
+      params: {
+        id: 1
+      }
+    }).then((res) => {
+      setName(res.data)
+    })
+  },[])
 //Bjishkneri hamar---------------------------------------------------------------
   const [doctor, setDoctor] = useState([]);
 
