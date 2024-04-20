@@ -129,7 +129,7 @@ function App() {
     }
   })
 
-  useEffect(()=> {
+  useEffect(() => {
     publicAPI.get('/users', {
       params: {
         id: 1
@@ -137,22 +137,23 @@ function App() {
     }).then((res) => {
       setName(res.data)
     })
-  },[])
-//Bjishkneri hamar---------------------------------------------------------------
+  }, [])
+  //Bjishkneri hamar---------------------------------------------------------------
   const [doctor, setDoctor] = useState([]);
 
-const getDoctorInfo = useCallback((category)=> {
-  return () => {
-    doctorAPI.get('/', {
-      params: {
-        page: 1,
-        category: category
-      }
-    }).then((res) => {
-      setDoctor(res.data.results)
-    })
-  }
-})
+  const getDoctorInfo = useCallback((category) => {
+    return () => {
+      doctorAPI.get('/', {
+        params: {
+          page: 1,
+          category: category
+        }
+      }).then((res) => {
+        setDoctor(res.data.results)
+
+      })
+    }
+  })
 
   useEffect(() => {
     doctorAPI.get('/', {
@@ -161,24 +162,30 @@ const getDoctorInfo = useCallback((category)=> {
         category: 1
       }
     }).then((res) => {
-      setDoctor(res.data.results)
+      setDoctor(res.data.results);
     })
   }, [])
 
+  const text = (textt) => {
+    return {
+      __html: textt
+    }
+  }
 
   //React i18next targmanutyun kazmakerpelu hamar---------------------------------------------------------
 
   // const { t, i18n } = useTranslation();
   return (
     <>
-      {doctor.map((item) => {
+      {doctor.map((item, index) => {
         return (
-          <>
-          <h1>{item.first_name}</h1>
-          <div>
-            <img alt="img" style={{width: '50px', height: '50px', borderRadius: '50%'}} src={item.profile_image} ></img>
+          <div key={index}>
+            <h1>{item.first_name}</h1>
+            <div>
+              <img alt="img" style={{ width: '100px', height: '100px', borderRadius: '50%' }} src={item.profile_image} ></img>
+            </div>
+            <h6 dangerouslySetInnerHTML={text(item.user_categories[0].category.full_description.ru)}></h6>
           </div>
-          </>
         )
       })}
 
