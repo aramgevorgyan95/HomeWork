@@ -176,7 +176,7 @@ function App() {
 
   // const { t, i18n } = useTranslation();
   return (
-    <>
+    <div>
       {doctor.map((item, index) => {
         return (
           <div key={index}>
@@ -191,9 +191,9 @@ function App() {
         )
       })}
 
-      <button onClick={getDoctorInfo(1)}>doctor 1</button>
-      <button onClick={getDoctorInfo(2)}>doctor 2</button>
-      <button onClick={getDoctorInfo(4)}>doctor 3</button>
+      <button onClick={getDoctorInfo(1)}>Терапевт</button>
+      <button onClick={getDoctorInfo(2)}>Педиатр</button>
+      <button onClick={getDoctorInfo(4)}>Акушер-гинеколог</button>
       {/* <NameCreateContext.Provider value={{ name, setName,translateRU,translateEN }}>
         <Red />
       </NameCreateContext.Provider>
@@ -259,7 +259,7 @@ function App() {
         i18n.changeLanguage('ru')
       }}>en</button> */}
 
-    </>
+    </div>
   )
 }
 
