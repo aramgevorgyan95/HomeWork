@@ -128,7 +128,7 @@ function App() {
       })
     }
   })
-
+//Bjishkneri hamar---------------------------------------------------------------
   const [doctor, setDoctor] = useState([]);
 
 const getDoctorInfo = useCallback((category)=> {
@@ -166,7 +166,7 @@ const getDoctorInfo = useCallback((category)=> {
           <>
           <h1>{item.first_name}</h1>
           <div>
-            <img style={{width: '50px', height: '50px', borderRadius: '50%'}} src={item.profile_image}></img>
+            <img alt="img" style={{width: '50px', height: '50px', borderRadius: '50%'}} src={item.profile_image} ></img>
           </div>
           </>
         )
