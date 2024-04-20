@@ -129,6 +129,31 @@ function App() {
     }
   })
 
+  const [doctor, setDoctor] = useState([]);
+
+const getDoctorInfo = useCallback((category)=> {
+  return () => {
+    doctorAPI.get('/', {
+      params: {
+        page: 1,
+        category: category
+      }
+    }).then((res) => {
+      setDoctor(res.data.results)
+    })
+  }
+})
+
+  useEffect(() => {
+    doctorAPI.get('/', {
+      params: {
+        page: 1,
+        category: 1
+      }
+    }).then((res) => {
+      setDoctor(res.data.results)
+    })
+  }, [])
 
 
   //React i18next targmanutyun kazmakerpelu hamar---------------------------------------------------------
@@ -136,8 +161,20 @@ function App() {
   // const { t, i18n } = useTranslation();
   return (
     <>
+      {doctor.map((item) => {
+        return (
+          <>
+          <h1>{item.first_name}</h1>
+          <div>
+            <img style={{width: '50px', height: '50px', borderRadius: '50%'}} src={item.profile_image}></img>
+          </div>
+          </>
+        )
+      })}
 
-
+      <button onClick={getDoctorInfo(1)}>doctor 1</button>
+      <button onClick={getDoctorInfo(2)}>doctor 2</button>
+      <button onClick={getDoctorInfo(4)}>doctor 3</button>
       {/* <NameCreateContext.Provider value={{ name, setName,translateRU,translateEN }}>
         <Red />
       </NameCreateContext.Provider>
