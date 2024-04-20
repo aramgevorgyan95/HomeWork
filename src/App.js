@@ -27,7 +27,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import publicAPI from "./services/api/publicAPI";
 import './App.css';
 
+//Bjishkneri hamar---------------------------------------------------------------------------------
 
+import doctorAPI from './services/api/doctoraxios'
 
 //React i18next targmanutyun kazmakerpelu hamar--------------------------------------------------
 
@@ -50,61 +52,64 @@ function App() {
 
 
   // AXIOSI HAMAR........................................................................
-  
-  const [albom, setAlbom] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [photo, setPhoto] = useState([]);
-  const [status, setStatus] = useState(true);
 
-  useEffect(() => {
-    setLoading(true);
-    publicAPI.get('/albums').then((res) => {
-      setAlbom(res.data);
-      setLoading(false)
-    })
-  }, []);
+  // const [albom, setAlbom] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const [photo, setPhoto] = useState([]);
+  // const [status, setStatus] = useState(true);
 
-  const handleClickImageId = useCallback((id) => {
-    return () => {
-      setLoading(true);
-      publicAPI.get('/photos', {
-        params: {
-          albumId: id
-        }
-      }).then((res) => {
-        setPhoto(res.data)
-        setLoading(false);
-        setStatus(false)
-      })
-    }
-  })
+  // useEffect(() => {
+  //   setLoading(true);
+  //   publicAPI.get('/albums').then((res) => {
+  //     setAlbom(res.data);
+  //     setLoading(false)
+  //   })
+  // }, []);
 
-  const content = useMemo(() => {
-    if (status) {
-      return albom.map((item, index) => {
-        return (
-          <div onClick={handleClickImageId(item.id)} className="card" key={index}>
-            <h2>ID: {item.id}</h2>
-            <h3>TITLE: {item.title}</h3>
-          </div>
-        )
-      })
-    }
-    else {
-      return photo.map((item, index) => {
-        return (
-          <div key={index}>
-            <img style={{ width: '50px', height: '50px' }} src={item.url} />
-          </div>
-        )
-      })
-    }
-  }, [status, albom, photo]);
-  //--------------------------------------------------------------------------------------------------------------
+  // const handleClickImageId = useCallback((id) => {
+  //   return () => {
+  //     setLoading(true);
+  //     publicAPI.get('/photos', {
+  //       params: {
+  //         albumId: id
+  //       }
+  //     }).then((res) => {
+  //       setPhoto(res.data)
+  //       setLoading(false);
+  //       setStatus(false)
+  //     })
+  //   }
+  // })
+
+  // const content = useMemo(() => {
+  //   if (status) {
+  //     return albom.map((item, index) => {
+  //       return (
+  //         <div onClick={handleClickImageId(item.id)} className="card" key={index}>
+  //           <h2>ID: {item.id}</h2>
+  //           <h3>TITLE: {item.title}</h3>
+  //         </div>
+  //       )
+  //     })
+  //   }
+  //   else {
+  //     return photo.map((item, index) => {
+  //       return (
+  //         <div key={index}>
+  //           <img style={{ width: '50px', height: '50px' }} src={item.url} />
+  //         </div>
+  //       )
+  //     })
+  //   }
+  // }, [status, albom, photo]);
+
+
+  // //--------------------------------------------------------------------------------------------------------------
+
+
   const [users, setUsers] = useState([]);
   const [load, setLoad] = useState(false);
   const [name, setName] = useState([]);
-  // const [clickButton, setClickButton] = useState(false)
   useEffect(() => {
     setLoad(true)
     publicAPI.get('/users').then((res) => {
@@ -112,6 +117,8 @@ function App() {
       setLoad(false)
     })
   }, [])
+
+
 
   const getNameid = useCallback((id) => {
     return () => {
@@ -125,12 +132,33 @@ function App() {
     }
   })
 
+//bjishkneri hamar------------------------------------------------------------------------------
+  const [doctor, setDoctor] = useState([]);
+
+  useEffect(()=> {
+    doctorAPI.get('/', {
+      params:{
+        page: 1,
+        category: 1
+      }
+    }).then((res)=> {
+      setDoctor(res.data.results);
+    })
+  },[])
 
   //React i18next targmanutyun kazmakerpelu hamar---------------------------------------------------------
 
   // const { t, i18n } = useTranslation();
   return (
     <>
+        {doctor.results.map((item,index) => {
+          return <h1 key={index}>{item.first_name}</h1>
+        })}
+      <button>Терапевт</button>
+      <button>Педиатр</button>
+      <button>Акушер-гинеколог</button>
+
+
       {load ? 'Loading' : users.map((item, index) => {
         return <button onClick={getNameid(item.id)} key={index}>
           {item.id}
@@ -138,7 +166,10 @@ function App() {
       })}
 
       {name.map((item, index) => {
-        return <h1 key={index}>{item.name}</h1>
+        return <div>
+          <h1 key={index}>{item.name}</h1>
+          <h1 key={index}>{item.phone}</h1>
+        </div>
       })}
 
       {/* <NameCreateContext.Provider value={{ name, setName,translateRU,translateEN }}>
@@ -165,10 +196,10 @@ function App() {
 
 
       {/* AXIOSI HAMAR ----------------------------------------------------------------------*/}
-
+{/* 
       {<div>
         {loading ? <p>Loading ........</p> : content}
-      </div>}
+      </div>} */}
 
 
 
