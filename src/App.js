@@ -135,7 +135,7 @@ function App() {
         id: 1
       }
     }).then((res) => {
-      setName(res.data)
+      setName(res.data);
     })
   }, [])
   //Bjishkneri hamar---------------------------------------------------------------
@@ -149,7 +149,7 @@ function App() {
           category: category
         }
       }).then((res) => {
-        setDoctor(res.data.results)
+        setDoctor(res.data.results);
 
       })
     }
@@ -181,6 +181,8 @@ function App() {
         return (
           <div key={index}>
             <h1>{item.first_name}</h1>
+            <h1>{item.date_of_birth}</h1>
+            <h1>{item.user_categories[0].category.title.ru}</h1>
             <div>
               <img alt="img" style={{ width: '100px', height: '100px', borderRadius: '50%' }} src={item.profile_image} ></img>
             </div>
