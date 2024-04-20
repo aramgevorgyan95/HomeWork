@@ -111,7 +111,7 @@ function App() {
   useEffect(() => {
     publicAPI.get('/users').then((res) => {
       setUsers(res.data);
-
+      // console.log(res.data);
     })
   }, [])
 
@@ -129,51 +129,13 @@ function App() {
     }
   })
 
-  //bjishkneri hamar------------------------------------------------------------------------------
-  const [doctor, setDoctor] = useState([]);
 
-  useEffect(() => {
-    doctorAPI.get('/', {
-      params: {
-        page: 1,
-        category: 1
-      }
-    }).then((res) => {
-      setDoctor(res.data);
-      console.log(res.data);
-    })
-  }, [])
 
   //React i18next targmanutyun kazmakerpelu hamar---------------------------------------------------------
 
   // const { t, i18n } = useTranslation();
   return (
     <>
-    {doctor.count}
-      {/* {doctor.map((item, index) => {
-        return <h1 key={index}>
-          {item.count}
-        </h1>
-      })} */}
-      <button>Терапевт</button>
-      <button>Педиатр</button>
-      <button>Акушер-гинеколог</button>
-
-        {/* userner */}
-      {users.map((item, index) => {
-        return <button onClick={getNameid(item.id)} key={index}>
-          {item.id}
-        </button>
-      })}
-
-      {name.map((item, index) => {
-        return <div>
-          <h1 key={index}>{item.name}</h1>
-          <h1 key={index}>{item.phone}</h1>
-        </div>
-      })}
-
-
 
 
       {/* <NameCreateContext.Provider value={{ name, setName,translateRU,translateEN }}>
@@ -204,6 +166,22 @@ function App() {
       {<div>
         {loading ? <p>Loading ........</p> : content}
       </div>} */}
+
+
+      {/* userner */}
+      {users.map((item, index) => {
+        return <button onClick={getNameid(item.id)} key={index}>
+          {item.id}
+        </button>
+      })}
+
+      {name.map((item, index) => {
+        return <div>
+          <h1 key={index}>{item.name}</h1>
+          <h1 key={index}>{item.phone}</h1>
+        </div>
+      })}
+
 
 
 
