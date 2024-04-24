@@ -34,10 +34,11 @@
 // import { Trans, useTranslation } from "react-i18next";
 
 //REDUX----------------------------------------------------------------------------------------------
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UserAction } from "./store/actions";
 import { UserSelectors } from "./store/selectors";
+import publicAPI from "./services/api/publicAPI";
 // import publicAPI from "./services/api/publicAPI";
 
 
@@ -209,6 +210,17 @@ function App() {
   const name = useSelector(UserSelectors.nameSelector)
 
   const email = useSelector(UserSelectors.emailSelector)
+
+  const users = useSelector(UserAction.setUser)
+
+  console.log(users.payload.data.user.data.id);
+
+
+useEffect(()=> {
+  publicAPI.get('/users').then((res)=> {
+    dispatch(UserAction.setUser(res.data[0]));
+  })
+},[dispatch, UserAction.setUser]);
 
   // console.log(datadoctor);
   //   useEffect(() => {

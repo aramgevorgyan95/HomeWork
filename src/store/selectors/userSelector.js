@@ -6,7 +6,11 @@ const emailSelector = (state) => {
     return state.user.email
 }
 
+const getUsers = (state) => {
+    return state.user
+}
 export {
     nameSelector,
-    emailSelector
+    emailSelector,
+    getUsers
 }

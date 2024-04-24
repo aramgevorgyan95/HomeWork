@@ -41,12 +41,14 @@ function logout() {
 }
 
 
-// function getUsersId (data){
-//     return {
-//         type: UserTypes.GETUSERSDATA,
-//         payload: data
-//     }
-// }
+function setUser (data){
+    return {
+        type: UserTypes.GETUSERSDATA,
+        payload: {
+            data:data
+        }
+    }
+}
 
 export {
     login,
@@ -54,5 +56,5 @@ export {
     email,
     changeEmail,
     logout,
-    // getUsersId
+    setUser
 }

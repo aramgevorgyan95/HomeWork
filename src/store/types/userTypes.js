@@ -3,7 +3,7 @@ const EMAIL = "userTypes@EMAIL"
 const LOGOUT = "userTypes@LOGOUT";
 const CHANGENAME = "userTypes@CHANGENAME";
 const CHANGEEMAIL = "userTypes@CHANGEEMAIL";
-// const GETUSERSDATA = "userTypes@GETUSERS"
+const GETUSERSDATA = "userTypes@GETUSERS"
 
 export {
     LOGIN,
@@ -11,5 +11,5 @@ export {
     LOGOUT,
     CHANGENAME,
     CHANGEEMAIL,
-    // GETUSERSDATA
+    GETUSERSDATA
 }

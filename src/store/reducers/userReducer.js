@@ -18,8 +18,8 @@ export default function (state = initData, action) {
             return { ...state, ...payload };
         case UserTypes.LOGOUT:
             return initData;
-        // case UserTypes.GETUSERSDATA:
-        //     return payload
+        case UserTypes.GETUSERSDATA:
+            return payload
         default:
             return state
     }
