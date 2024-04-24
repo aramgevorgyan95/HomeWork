@@ -5,6 +5,8 @@
 // import Language from './translate';
 // import { useEffect } from 'react';
 
+
+
 //------------------------------------------------------------------------------------
 // import { Link, Route, Routes } from "react-router-dom";
 // import Button from "./components/buttons/button";
@@ -32,6 +34,11 @@
 // import { Trans, useTranslation } from "react-i18next";
 
 //REDUX----------------------------------------------------------------------------------------------
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { UserAction } from "./store/actions";
+import { UserSelectors } from "./store/selectors";
+// import publicAPI from "./services/api/publicAPI";
 
 
 
@@ -176,10 +183,52 @@ function App() {
 
 
   //REDUX--------------------------------------------------------------------------------------------------------
+  const dispatch = useDispatch();
+
+  //sik erel enq or sxmenq inqy ereva anuny
+  const clickHandlerName = useCallback(() => {
+    dispatch(UserAction.login('Aram'))
+  }, [dispatch]);
+  //sik erel enq or poxenq anuny
+  const clickHandlerChangeName = useCallback(() => {
+    dispatch(UserAction.changeName('Anna'))
+  }, [dispatch]);
+  //sorov poxenq emaily
+  const clickHandlerEmail = useCallback(() => {
+    dispatch(UserAction.email('AramGevorgyan95@gmail.com'))
+  }, [dispatch]);
+  //sorov kpoxenq emaily
+  const clickChangeEmail = useCallback(() => {
+    dispatch(UserAction.changeEmail('AnnaAtoyan99@gmail.com'))
+  }, [dispatch]);
+  //sik erel enq or sxmenq inqy jnjvi
+  const clickHandlerDelete = useCallback(() => {
+    dispatch(UserAction.logout())
+  }, [dispatch]);
+
+  const name = useSelector(UserSelectors.nameSelector)
+
+  const email = useSelector(UserSelectors.emailSelector)
+
+  // console.log(datadoctor);
+  //   useEffect(() => {
+  //     publicAPI.get('/users').then((res) => {
+  //       dispatch(UserAction.getUsersId(res.data))
+  //     })
+  //   }, [dispatch])
 
 
   return (
     <div>
+      {/* REDUX-------------------------------------------------------------------------------------- */}
+      <h1>{name} : {email}</h1>
+      <div style={{ display: 'flex', flexDirection: 'column', width: '100px', margin: '10px', gap: '10px' }}>
+        <button onClick={clickHandlerName} style={{ backgroundColor: 'yellowgreen' }}>sxmenq or ereva anuny</button>
+        <button onClick={clickHandlerEmail} style={{ backgroundColor: 'yellowgreen' }}>sxmenq or ereva emaily</button>
+        <button onClick={clickHandlerChangeName} style={{ backgroundColor: 'yellow' }}>sxmenq or poxenq anuny</button>
+        <button onClick={clickChangeEmail} style={{ backgroundColor: 'yellow' }}>sxmenq or poxenq emaily</button>
+        <button onClick={clickHandlerDelete} style={{ backgroundColor: 'red' }} >sxmenq or jnjenq sax</button>
+      </div>
       {/* <NameCreateContext.Provider value={{ name, setName,translateRU,translateEN }}>
         <Red />
       </NameCreateContext.Provider>

@@ -5,14 +5,19 @@ import App from './App';
 //routi hamar e ejic ej ertalu
 import { BrowserRouter } from 'react-router-dom';
 import './services/i18n';
+//reduxi hamar
+import { Provider } from 'react-redux';
+import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <React.StrictMode>
-    <BrowserRouter> 
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
