@@ -5,10 +5,6 @@
 // import Language from './translate';
 // import { useEffect } from 'react';
 
-
-
-
-
 //------------------------------------------------------------------------------------
 // import { Link, Route, Routes } from "react-router-dom";
 // import Button from "./components/buttons/button";
@@ -21,21 +17,22 @@
 // import AboutCompany from "./views/about/AboutCompany";
 
 
-//AXIOSI HAMAR---------------------------------------------------------------------------
+//AXIOSI HAMAR u userneri hamarel krnanq ogtagorcenq sonq---------------------------------------------------------------------------
 
-import { useCallback, useEffect, useMemo, useState } from "react";
-import publicAPI from "./services/api/publicAPI";
-import './App.css';
+// import { useCallback, useEffect, useMemo, useState } from "react";
+// import publicAPI from "./services/api/publicAPI";
+// import './App.css';
 
 //Bjishkneri hamar---------------------------------------------------------------------------------
 
-import doctorAPI from './services/api/doctoraxios'
+// import doctorAPI from './services/api/doctoraxios'
 
 //React i18next targmanutyun kazmakerpelu hamar--------------------------------------------------
 
 // import { Trans, useTranslation } from "react-i18next";
 
-//REDUX
+//REDUX----------------------------------------------------------------------------------------------
+
 
 
 function App() {
@@ -105,95 +102,84 @@ function App() {
 
 
   // userner--------------------------------------------------------------------------------------------------------------
-  const [users, setUsers] = useState([]);
-  const [name, setName] = useState([]);
+  // const [users, setUsers] = useState([]);
+  // const [name, setName] = useState([]);
 
-  useEffect(() => {
-    publicAPI.get('/users').then((res) => {
-      setUsers(res.data);
-      // console.log(res.data);
-    })
-  }, [])
+  // useEffect(() => {
+  //   publicAPI.get('/users').then((res) => {
+  //     setUsers(res.data);
+  //     // console.log(res.data);
+  //   })
+  // }, [])
 
 
 
-  const getNameid = useCallback((id) => {
-    return () => {
-      publicAPI.get('/users', {
-        params: {
-          id: id
-        }
-      }).then((res) => {
-        setName(res.data)
-      })
-    }
-  })
+  // const getNameid = useCallback((id) => {
+  //   return () => {
+  //     publicAPI.get('/users', {
+  //       params: {
+  //         id: id
+  //       }
+  //     }).then((res) => {
+  //       setName(res.data)
+  //     })
+  //   }
+  // })
 
-  useEffect(() => {
-    publicAPI.get('/users', {
-      params: {
-        id: 1
-      }
-    }).then((res) => {
-      setName(res.data);
-    })
-  }, [])
+  // useEffect(() => {
+  //   publicAPI.get('/users', {
+  //     params: {
+  //       id: 1
+  //     }
+  //   }).then((res) => {
+  //     setName(res.data);
+  //   })
+  // }, [])
+
   //Bjishkneri hamar---------------------------------------------------------------
-  const [doctor, setDoctor] = useState([]);
+  // const [doctor, setDoctor] = useState([]);
 
-  const getDoctorInfo = useCallback((category) => {
-    return () => {
-      doctorAPI.get('/', {
-        params: {
-          page: 1,
-          category: category
-        }
-      }).then((res) => {
-        setDoctor(res.data.results);
+  // const getDoctorInfo = useCallback((category) => {
+  //   return () => {
+  //     doctorAPI.get('/', {
+  //       params: {
+  //         page: 1,
+  //         category: category
+  //       }
+  //     }).then((res) => {
+  //       setDoctor(res.data.results);
 
-      })
-    }
-  })
+  //     })
+  //   }
+  // })
 
-  useEffect(() => {
-    doctorAPI.get('/', {
-      params: {
-        page: 1,
-        category: 1
-      }
-    }).then((res) => {
-      setDoctor(res.data.results);
-    })
-  }, [])
+  // useEffect(() => {
+  //   doctorAPI.get('/', {
+  //     params: {
+  //       page: 1,
+  //       category: 1
+  //     }
+  //   }).then((res) => {
+  //     setDoctor(res.data.results);
+  //   })
+  // }, [])
 
-  const text = (textt) => {
-    return {
-      __html: textt
-    }
-  }
+  // const text = (textt) => {
+  //   return {
+  //     __html: textt
+  //   }
+  // }
 
   //React i18next targmanutyun kazmakerpelu hamar---------------------------------------------------------
-
   // const { t, i18n } = useTranslation();
+
+
+
+  //REDUX--------------------------------------------------------------------------------------------------------
+
+
   return (
     <div>
-      {doctor.map((item, index) => {
-        return (
-          <div key={index}>
-            <h1>{item.first_name}</h1>
-            <h1>{item.date_of_birth}</h1>
-            <h1>{item.user_categories[0].category.title.ru}</h1>
-            <div>
-              <img alt="img" style={{ width: '100px', height: '100px', borderRadius: '50%' }} src={item.profile_image} ></img>
-            </div>
-            <h6 dangerouslySetInnerHTML={text(item.user_categories[0].category.full_description.ru)}></h6>
-          </div>
-        )
-      })}
-
-      <button onClick={getDoctorInfo(1)}>Терапевт</button>
-      <button onClick={getDoctorInfo(2)}>Педиатр</button>
-      <button onClick={getDoctorInfo(4)}>Акушер-гинеколог</button>
       {/* <NameCreateContext.Provider value={{ name, setName,translateRU,translateEN }}>
         <Red />
       </NameCreateContext.Provider>
@@ -224,8 +210,8 @@ function App() {
       </div>} */}
 
 
-      {/* userner */}
-      {users.map((item, index) => {
+      {/* userner --------------------------------------------------------------------------*/}
+      {/* {users.map((item, index) => {
         return <button onClick={getNameid(item.id)} key={index}>
           {item.id}
         </button>
@@ -236,8 +222,28 @@ function App() {
           <h1 key={index}>{item.name}</h1>
           <h1 key={index}>{item.phone}</h1>
         </div>
+      })} */}
+
+      {/* {BJISHKNERI HAMAR----------------------------------------------------------------------------------------} */}
+
+      {/* {doctor.map((item, index) => {
+        return (
+          <div key={index}>
+            <h1>{item.first_name}</h1>
+            <h1>{item.date_of_birth}</h1>
+            <h1>{item.user_categories[0].category.title.ru}</h1>
+
+            <div>
+              <img alt="img" style={{ width: '100px', height: '100px', borderRadius: '50%' }} src={item.profile_image} ></img>
+            </div>
+            <h6 dangerouslySetInnerHTML={text(item.user_categories[0].category.full_description.ru)}></h6>
+          </div>
+        )
       })}
 
+      <button onClick={getDoctorInfo(1)}>Терапевт</button>
+      <button onClick={getDoctorInfo(2)}>Педиатр</button>
+      <button onClick={getDoctorInfo(4)}>Акушер-гинеколог</button> */}
 
 
 
