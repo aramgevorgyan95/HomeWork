@@ -213,12 +213,12 @@ function App() {
 
   const users = useSelector(UserAction.setUser)
 
-  console.log(users.payload.data.user.data.id);
+  console.log(users.payload.user[0].id);
 
 
 useEffect(()=> {
   publicAPI.get('/users').then((res)=> {
-    dispatch(UserAction.setUser(res.data[0]));
+    dispatch(UserAction.setUser(res.data));
   })
 },[dispatch, UserAction.setUser]);
 

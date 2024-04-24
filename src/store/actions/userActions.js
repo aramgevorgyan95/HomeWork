@@ -44,9 +44,7 @@ function logout() {
 function setUser (data){
     return {
         type: UserTypes.GETUSERSDATA,
-        payload: {
-            data:data
-        }
+        payload: data
     }
 }
 
