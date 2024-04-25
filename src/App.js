@@ -211,9 +211,9 @@ function App() {
 
   const email = useSelector(UserSelectors.emailSelector)
 
-  const users = useSelector(UserAction.setUser)
+  const users = useSelector(UserSelectors.getUsers)
 
-  console.log(users.payload.user[0].id);
+  console.log(users?.[0]?.id);
 
 
 useEffect(()=> {
